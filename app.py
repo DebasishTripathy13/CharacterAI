@@ -4,7 +4,7 @@ from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 
 
-Googleapi = "AIzaSyC6ZMrnvkiFwYsmaci0BrdX0bkTub9JfMc"
+Googleapi = "enter your gemini api key here"
 genai.configure(api_key=Googleapi)
 
 model = genai.GenerativeModel('gemini-1.5-pro-latest')
