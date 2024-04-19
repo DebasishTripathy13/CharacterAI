@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Interface</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-purple-100">
+    <div class="container mx-auto mt-5 p-5 border border-purple-300 rounded bg-white shadow-lg">
+        <h1 class="font-bold text-4xl">Chatbot Interface</h1>
+        <form action="/" method="POST" class="bg-purple-50 p-5 rounded shadow-lg">
+            <div class="form-group mb-4">
+                <label for="ownername" class="font-bold mb-2 text-purple-600">Your Name:</label>
+                <input type="text" id="ownername" name="ownername" required class="form-control p-2 rounded border border-purple-300">
+            </div>
+            <div class="form-group mb-4">
+                <label for="charactername" class="font-bold mb-2 text-purple-600">Character Name:</label>
+                <input type="text" id="charactername" name="charactername" required class="form-control p-2 rounded border border-purple-300">
+            </div>
+            <div class="form-group mb-4">
+                <label for="characterdetails" class="font-bold mb-2 text-purple-600">Character Personality:</label>
+                <textarea id="characterdetails" name="characterdetails" rows="4" required class="form-control p-2 rounded border border-purple-300"></textarea>
+            </div>
+            <input type="submit" value="Create" class="btn btn-primary mt-3">
+        </form>
+    </div>
+</body>
+</html>

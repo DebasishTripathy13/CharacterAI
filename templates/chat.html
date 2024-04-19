@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot Interface</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="text-center">
+        <h1 class="font-bold text-4xl">{{session['charactername']}} Chatbot Interface</h1>
+    </div>
+    <div class="container mx-auto mt-5 p-5 border border-gray-300 rounded bg-gray-100">
+        {% for message in messages %}
+            {% if message['sender'] == 'user' %}
+                <div class="p-3 mb-2 rounded text-right bg-blue-200">
+                    {{session['ownername']}}: <br>
+                    {{ message['content'] }}
+                </div>
+            {% elif message['sender'] == 'bot' %}
+                <div class="p-3 mb-2 rounded bg-gray-200">
+                    {{session['charactername']}}: <br>
+                    {{ message['content'] }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <form method="post" class="mt-5" style="max-width: 150vb; max-height: 60vh; margin: 20vb auto;">
+        <div class="form-group">
+            <label for="question">Ask question:</label>
+            <textarea id="question" name="question" rows="4" class="form-control"></textarea>
+        </div>
+        <input type="submit" value="Ask" class="btn btn-primary">
+    </form>
+</body>
+</html>
