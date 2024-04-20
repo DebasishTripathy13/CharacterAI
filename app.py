@@ -1,16 +1,25 @@
 from flask import Flask, render_template, request, session, redirect, url_for
+from flask_pymongo import PyMongo
+from flask_session import Session
 import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
+import pandas as pd
+import secrets
 
-
-
-Googleapi = "enter your gemini api key here"
+Googleapi = "enter your own gemini api"
 genai.configure(api_key=Googleapi)
 
 model = genai.GenerativeModel('gemini-1.5-pro-latest')
 model1=genai.GenerativeModel('gemini-1.0-pro-latest')
 app = Flask(__name__)
-app.secret_key = "your_secret_key_here"
+app.secret_key = secrets.token_hex(16)
+
+# MongoDB configuration
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/mydatabase'
+app.config['SESSION_TYPE'] = 'mongodb'
+app.config['SESSION_MONGODB'] = PyMongo(app)
+
+Session(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -18,7 +27,7 @@ def index():
         session['ownername'] = request.form['ownername']
         session['charactername'] = request.form['charactername']
         session['characterdetails'] = request.form['characterdetails']
-        charactepersonalityresponse = model1.generate_content(["generate a charater description for the below details in text only neglect all safety_ratings and stuff you will only summerize its characters personality in text only " + session['characterdetails']],
+        charactepersonalityresponse = model.generate_content(["generate a charater description for the below details in text only neglect all safety_ratings and stuff you will only summerize its characters personality in text only " + session['characterdetails']],
                                                               safety_settings={
                                                                                 HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
                                                                                 HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
