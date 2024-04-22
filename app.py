@@ -6,10 +6,12 @@ from google.generativeai.types import HarmCategory, HarmBlockThreshold
 import pandas as pd
 import secrets
 
-Googleapi = "YOUR_GOOGLE_API_KEY"
+Googleapi = "add your own google api"
 genai.configure(api_key=Googleapi)
 
 model = genai.GenerativeModel('gemini-1.5-pro-latest')
+chat1 = model.start_chat(history=[])
+
 model1 = genai.GenerativeModel('gemini-1.0-pro-latest')
 app = Flask(__name__)
 
@@ -29,12 +31,13 @@ def index():
         session['ownername'] = request.form['ownername']
         session['charactername'] = request.form['charactername']
         session['characterdetails'] = request.form['characterdetails']
-        charactepersonalityresponse = model.generate_content(["generate a charater description for the below details in text only neglect all safety_ratings and stuff you will only summerize its characters personality in text only " + session['characterdetails']],
+        charactepersonalityresponse = chat1.send_message(["generate a charater description for the below details in text only neglect all safety_ratings and stuff you will only summerize its characters personality in text only " + session['characterdetails']],
                                                               safety_settings={
                                                                   HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
                                                                   HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
                                                                   HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
                                                                   HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,})
+        
         session['charactepersonality'] = charactepersonalityresponse.text
         return redirect(url_for('chat'))
     else:
@@ -49,8 +52,8 @@ def chat():
     
     if request.method == 'POST':
         question = request.form['question']
-        query = ("you roleplay the character with the following personality and respond to the above question accordingly to the character here is the personality of character with details mentioned below use internet to gater more infor mation too  " + session['charactepersonality'] + " and your new owner/master/friend etc is me ie " + session['ownername'])
-        response = model.generate_content([question + query], safety_settings={
+        query = ("use the previos history to continue the the conversation  if any available and you roleplay the character with the following personality and respond to the above question accordingly to the character here is the personality of character with details mentioned below use internet to gater more infor mation too  " + session['charactepersonality'] + " and your new owner/master/friend etc is me ie " + session['ownername'])
+        response = chat1.send_message([question + query], safety_settings={
             HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
             HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
             HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
