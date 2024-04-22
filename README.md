@@ -59,6 +59,7 @@ To run the application, follow these steps:
 - Google GenerativeAI: API for generating text-based responses.
 - HTML/CSS: Frontend for the chat interface.
 - JavaScript: Frontend for dynamic interactions.
+- MongoDB: For storage of tokenid 
 
 ## Contributing
 
