@@ -12,7 +12,7 @@ import time
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
-Googleapi = "AIzaSyC6ZMrnvkiFwYsmaci0BrdX0bkTub9JfMc"
+Googleapi = "own gemini key"
 genai.configure(api_key=Googleapi)
 
 model = genai.GenerativeModel('gemini-1.5-pro-latest')
