@@ -1,7 +1,7 @@
 
 # CharacterAI Chatbot
 
-This is a simple chatbot application built with Flask and Google's GenerativeAI. It allows users to interact with a character by asking questions and receiving responses based on the character's personality.
+This is a simple chatbot application built with Flask and Google's GenerativeAI And custom NLP . It allows users to interact with a character by asking questions and receiving responses based on the character's personality.
 
 ## Getting Started
 
