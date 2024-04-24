@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        .theme-switch {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #121212;
+            color: white;
+        }
+
+        form {
+            width: 100%;
+            max-width: 400px;
+            background-color: #374151; /* Default form box color */
+            padding: 20px;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+
+        /* Flash message styles */
+        .flash-message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .flash-message.error {
+            background-color: #ffcccc;
+            color: #cc0000;
+        }
+
+        .flash-message.success {
+            background-color: #ccffcc;
+            color: #006600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme switch button -->
+    <div class="theme-switch">
+        <input type="checkbox" id="theme-switch" class="hidden"/>
+        <label for="theme-switch" class="text-white cursor-pointer">Switch Theme</label>
+    </div>
+
+    <div class="container mx-auto py-8">
+        <div class="max-w-md mx-auto p-8 rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4 text-center">Register</h2>
+
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <form method="POST" id="register-form">
+                <div class="mb-4">
+                    <label for="email" class="block">Email:</label>
+                    <input type="email" id="email" name="email" class="form-input mt-1 block w-full bg-gray-700 text-white border-gray-700 rounded-md shadow-sm">
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block">Password:</label>
+                    <input type="password" id="password" name="password" class="form-input mt-1 block w-full bg-gray-700 text-white border-gray-700 rounded-md shadow-sm">
+                </div>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">
+                    Register
+                </button>
+            </form>
+
+            <p class="mt-4 text-center">Already have an account? <a href="/login" class="text-blue-500">Login</a></p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const themeSwitch = document.getElementById('theme-switch');
+        const registerForm = document.getElementById('register-form');
+        themeSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('bg-white', 'text-gray-900');
+                document.body.classList.remove('bg-gray-900', 'text-white');
+                registerForm.style.backgroundColor = '#f8f9fa'; // Light mode form box color
+            } else {
+                document.body.classList.remove('bg-white', 'text-gray-900');
+                document.body.classList.add('bg-gray-900', 'text-white');
+                registerForm.style.backgroundColor = '#374151'; // Dark mode form box color
+            }
+        });
+    </script>
+</body>
+</html>
