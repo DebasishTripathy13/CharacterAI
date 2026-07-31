@@ -1,5 +1,15 @@
 
+<p align="center">
+  <img src="static/banner-characterai.png" alt="CharacterAI Chatbot" width="100%">
+</p>
+
 # CharacterAI Chatbot
+
+<p align="center">
+  <img alt="Flask" src="https://img.shields.io/badge/backend-Flask-000000?style=flat-square&logo=flask&logoColor=white">
+  <img alt="AI" src="https://img.shields.io/badge/AI-Google%20GenerativeAI-4285F4?style=flat-square&logo=googlegemini&logoColor=white">
+  <img alt="License" src="https://img.shields.io/badge/license-AGPL--3.0-blue?style=flat-square">
+</p>
 
 This is a simple chatbot application built with Flask and Google's GenerativeAI And custom NLP . It allows users to interact with a character by asking questions and receiving responses based on the character's personality.
 
@@ -67,5 +77,5 @@ Contributions are welcome! If you have any suggestions or improvements, please o
 
 ## License
 
-This project is licensed under the GPL License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU AGPL v3 License. See the [LICENSE](LICENSE) file for details.
 
